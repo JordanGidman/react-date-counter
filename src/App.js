@@ -13,9 +13,11 @@ function Counter() {
   const [count, setCount] = useState(0);
   const [step, setStep] = useState(1);
 
+  //generate a new date each time the component is re-rendered
   const date = new Date();
   date.setDate(date.getDate() + count);
 
+  //Event handler functions
   function handleStepChange(e) {
     setStep(+e.target.value);
   }
@@ -28,9 +30,10 @@ function Counter() {
     setCount(0);
     setStep(1);
   }
-
+  //JSX
   return (
     <div className="counter">
+      <h1 className="title">Date Checker</h1>
       <div>
         <input
           type="range"
@@ -38,26 +41,36 @@ function Counter() {
           max="10"
           value={step}
           onChange={handleStepChange}
+          className="input-slider"
         />
 
-        <span>{step}</span>
+        <span className="slider-text">{step}</span>
       </div>
 
       <div>
-        <button onClick={() => setCount((c) => c - step)}>-</button>
-        <input type="number" value={count} onChange={handleCountChange} />
-        <button onClick={() => setCount((c) => c + step)}>+</button>
+        <button className="btn" onClick={() => setCount((c) => c - step)}>
+          -
+        </button>
+        <input
+          className="input-box"
+          type="number"
+          value={count}
+          onChange={handleCountChange}
+        />
+        <button className="btn" onClick={() => setCount((c) => c + step)}>
+          +
+        </button>
       </div>
 
       <p>
-        <span>
+        <span className="date-text">
           {count === 0
             ? "Today is "
             : count > 0
             ? `${count} days from today is `
             : `${Math.abs(count)} days ago was `}
         </span>
-        <span>{date.toDateString()}</span>
+        <span className="date-text">{date.toDateString()}</span>
       </p>
       {count !== 0 || step !== 1 ? (
         <button className="reset-btn" onClick={handleReset}>

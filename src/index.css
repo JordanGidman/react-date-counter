@@ -12,3 +12,29 @@
   align-items: center;
   gap: 1.2rem;
 }
+
+.title {
+  font-size: 2.4rem;
+  font-weight: 600;
+}
+
+.input-slider {
+}
+
+.input-box {
+  height: 2rem;
+  font-size: 1.6rem;
+}
+
+.btn {
+  font-size: 1.6rem;
+  height: 2.4rem;
+  width: 2.4rem;
+}
+
+.slider-text {
+}
+
+.date-text {
+  font-size: 1.8rem;
+}
