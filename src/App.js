@@ -1,25 +1,69 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./index.css";
 
-function App() {
+export default function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Counter />
     </div>
   );
 }
 
-export default App;
+function Counter() {
+  const [count, setCount] = useState(0);
+  const [step, setStep] = useState(1);
+
+  const date = new Date();
+  date.setDate(date.getDate() + count);
+
+  function handleStepChange(e) {
+    setStep(+e.target.value);
+  }
+
+  function handleCountChange(e) {
+    setCount(+e.target.value);
+  }
+
+  function handleReset() {
+    setCount(0);
+    setStep(1);
+  }
+
+  return (
+    <div className="counter">
+      <div>
+        <input
+          type="range"
+          min="0"
+          max="10"
+          value={step}
+          onChange={handleStepChange}
+        />
+
+        <span>{step}</span>
+      </div>
+
+      <div>
+        <button onClick={() => setCount((c) => c - step)}>-</button>
+        <input type="number" value={count} onChange={handleCountChange} />
+        <button onClick={() => setCount((c) => c + step)}>+</button>
+      </div>
+
+      <p>
+        <span>
+          {count === 0
+            ? "Today is "
+            : count > 0
+            ? `${count} days from today is `
+            : `${Math.abs(count)} days ago was `}
+        </span>
+        <span>{date.toDateString()}</span>
+      </p>
+      {count !== 0 || step !== 1 ? (
+        <button className="reset-btn" onClick={handleReset}>
+          Reset
+        </button>
+      ) : null}
+    </div>
+  );
+}
